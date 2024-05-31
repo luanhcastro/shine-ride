@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Types {
+  SIMPLE
+  COMPLETE
+}
+
+model Schedule {
+  id           String   @id @default(uuid())
+  startTime    DateTime
+  endTime      DateTime
+  type         Types    @default(SIMPLE)
+  licensePlate String
+  deletedAt    DateTime?
+
+  @@map("schedule")
+}
